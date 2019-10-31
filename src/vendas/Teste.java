@@ -10,5 +10,5 @@ package vendas;
  * @author bruno
  */
 public class Teste {
-    
+   
 }
