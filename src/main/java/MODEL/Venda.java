@@ -7,6 +7,7 @@ public class Venda {
     private int fk_estoque;
     private int fk_funcionario;
     private int quantidade_item;
+    private double valor_total;
 
     public int getId_venda() {
         return id_venda;
@@ -47,5 +48,5 @@ public class Venda {
     public void setValor_total(double valor_total) {
         this.valor_total = valor_total;
     }
-    private double valor_total;
+   
 }
