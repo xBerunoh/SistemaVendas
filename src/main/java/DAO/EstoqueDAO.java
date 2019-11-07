@@ -97,7 +97,7 @@ public List<Estoque> getLista() {
        try {
             
             List<Estoque> lista = new ArrayList<>();
-            String sql= "select * from Estoque where descricao like ?";
+            String sql= "select * from estoque where descricao like ?";
             PreparedStatement pst = connection.prepareStatement(sql);
             pst.setString(1, nome);
             ResultSet rs = pst.executeQuery();

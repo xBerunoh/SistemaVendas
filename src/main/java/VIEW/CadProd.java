@@ -385,9 +385,9 @@ public class CadProd extends javax.swing.JFrame {
 
     private void btnEditarCadCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarCadCliActionPerformed
         // TODO add your handling code here:
-        
+                    Estoque estoque = new Estoque();
+
         try {
-            Estoque estoque = new Estoque();
             estoque.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
             estoque.setDescricao(txtDescricao.getText());
             estoque.setPreco(Double.parseDouble(txtPreco.getText()));

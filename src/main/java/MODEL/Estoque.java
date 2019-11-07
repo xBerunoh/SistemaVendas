@@ -6,7 +6,7 @@ public class Estoque {
      private int quantidade;
     private String descricao;
     private double preco;
-    
+
     public int getId_produto() {
         return id_produto;
     }
@@ -38,4 +38,6 @@ public class Estoque {
     public void setPreco(double preco) {
         this.preco = preco;
     }
+    
+   
 }
