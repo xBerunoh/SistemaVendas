@@ -18,14 +18,14 @@ public class EstoqueDAO {
 
 	}
 public void adiciona(Estoque estoque ){
-		String sql = "insert into estoque" + "(descricao,preco,quantidade)" + "values (?,?,?,?)";
+		String sql = "insert into estoque" + "(descricao,preco,quantidade)" + "values (?,?,?)";
 		try {
                     PreparedStatement stmt = connection.prepareStatement(sql);
 
 			
-                        stmt.setInt(1, estoque.getQuantidade());
-                        stmt.setString(2, estoque.getDescricao());
-                        stmt.setDouble(3, estoque.getPreco());
+                        stmt.setString(1, estoque.getDescricao());
+                        stmt.setDouble(2, estoque.getPreco());
+                        stmt.setInt(3, estoque.getQuantidade());
                         stmt.execute();
 			stmt.close();
 
