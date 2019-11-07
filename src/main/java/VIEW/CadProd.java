@@ -24,7 +24,7 @@ public class CadProd extends javax.swing.JFrame {
     EstoqueDAO dao = new EstoqueDAO();
     List<Estoque> lista = dao.getLista();
         
-    DefaultTableModel dados = (DefaultTableModel) tabelaDeClientes.getModel();
+    DefaultTableModel dados = (DefaultTableModel) tabelaDeProdutos.getModel();
     dados.setNumRows(0);
     
     
@@ -69,11 +69,11 @@ public class CadProd extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         btnPesquisaNomeDadosPessoais = new javax.swing.JButton();
-        txtPreco = new javax.swing.JFormattedTextField();
-        txtQuantidade = new javax.swing.JFormattedTextField();
+        txtPreco = new javax.swing.JTextField();
+        txtQuantidade = new javax.swing.JTextField();
         painelConsultaClientes = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabelaDeClientes = new javax.swing.JTable();
+        tabelaDeProdutos = new javax.swing.JTable();
         jLabel14 = new javax.swing.JLabel();
         txtNomeConsultaCliente = new javax.swing.JTextField();
         btnPesquisaCliente = new javax.swing.JToggleButton();
@@ -147,23 +147,6 @@ public class CadProd extends javax.swing.JFrame {
             }
         });
 
-        try {
-            txtPreco.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-
-        try {
-            txtQuantidade.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        txtQuantidade.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtQuantidadeActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout painelDadosProdutoLayout = new javax.swing.GroupLayout(painelDadosProduto);
         painelDadosProduto.setLayout(painelDadosProdutoLayout);
         painelDadosProdutoLayout.setHorizontalGroup(
@@ -182,17 +165,17 @@ public class CadProd extends javax.swing.JFrame {
                         .addGroup(painelDadosProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(painelDadosProdutoLayout.createSequentialGroup()
                                 .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(29, 29, 29)
                                 .addComponent(jLabel15)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(painelDadosProdutoLayout.createSequentialGroup()
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtCodigoDados, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(1038, Short.MAX_VALUE))))
+                        .addContainerGap(1062, Short.MAX_VALUE))))
         );
         painelDadosProdutoLayout.setVerticalGroup(
             painelDadosProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,14 +193,14 @@ public class CadProd extends javax.swing.JFrame {
                 .addGroup(painelDadosProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(170, Short.MAX_VALUE))
         );
 
         painelDaTabelaClientes.addTab("Dados do Produto", painelDadosProduto);
 
-        tabelaDeClientes.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaDeProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -225,15 +208,15 @@ public class CadProd extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Código", "Quantidade", "Descrição", "Preço"
+                "Código", "Descrição", "Preço", "Quantidade"
             }
         ));
-        tabelaDeClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+        tabelaDeProdutos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tabelaDeClientesMouseClicked(evt);
+                tabelaDeProdutosMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tabelaDeClientes);
+        jScrollPane1.setViewportView(tabelaDeProdutos);
 
         jLabel14.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel14.setText("Nome:");
@@ -374,7 +357,7 @@ public class CadProd extends javax.swing.JFrame {
 
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, e);
+            JOptionPane.showMessageDialog(null, e);
 
         }
 
@@ -402,16 +385,14 @@ public class CadProd extends javax.swing.JFrame {
 
     private void btnEditarCadCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarCadCliActionPerformed
         // TODO add your handling code here:
-        double precoProduto = Double.parseDouble(txtPreco.getText());
-        int quantidadeProd = Integer.parseInt(txtQuantidade.getText());
+        
         try {
-
-            Estoque obj = new Estoque();
-            obj.setDescricao(txtDescricao.getText());
-            obj.setPreco(precoProduto);
-            obj.setQuantidade(quantidadeProd);
+            Estoque estoque = new Estoque();
+            estoque.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
+            estoque.setDescricao(txtDescricao.getText());
+            estoque.setPreco(Double.parseDouble(txtPreco.getText()));
             EstoqueDAO dao = new EstoqueDAO();
-            dao.altera(obj);
+            dao.altera(estoque);
             new utilitarios().LimpaTela(painelDadosProduto);
 
         } catch (Exception e) {
@@ -426,41 +407,25 @@ public class CadProd extends javax.swing.JFrame {
         
     }//GEN-LAST:event_formWindowActivated
 
-    private void tabelaDeClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaDeClientesMouseClicked
+    private void tabelaDeProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaDeProdutosMouseClicked
         // passar dados da tabela para o painel de Dados Pessoais
-       /* painelDaTabelaClientes.setSelectedIndex(0);
-        txtCodigoDados.setText(tabelaDeClientes.getValueAt(tabelaDeClientes
+        painelDaTabelaClientes.setSelectedIndex(0);
+        txtCodigoDados.setText(tabelaDeProdutos.getValueAt(tabelaDeProdutos
                 .getSelectedRow(), 0).toString());
         
-        txtNomeDados.setText(tabelaDeClientes.getValueAt(tabelaDeClientes
-                .getSelectedRow(), 1).toString());
-        txtRgDados.setText(tabelaDeClientes.getValueAt(tabelaDeClientes
-                .getSelectedRow(), 2).toString());
-        txtCpfDados.setText(tabelaDeClientes.getValueAt(tabelaDeClientes
-                .getSelectedRow(), 3).toString());
-        txtEmailDados.setText(tabelaDeClientes.getValueAt(tabelaDeClientes
-                .getSelectedRow(), 4).toString());
-        txtTelefonedados.setText(tabelaDeClientes.getValueAt(tabelaDeClientes
-                .getSelectedRow(), 5).toString());
-        txtCelularDados.setText(tabelaDeClientes.getValueAt(tabelaDeClientes
-                .getSelectedRow(), 6).toString());
-        txtCepDados.setText(tabelaDeClientes.getValueAt(tabelaDeClientes
-                .getSelectedRow(), 7).toString());
-        txtEnderecoDados.setText(tabelaDeClientes.getValueAt(tabelaDeClientes
-                .getSelectedRow(), 8).toString());
-        txtNumeroDados.setText(tabelaDeClientes.getValueAt(tabelaDeClientes
-                .getSelectedRow(), 9).toString());
-        txtComplementoDados.setText(tabelaDeClientes.getValueAt(tabelaDeClientes
-                .getSelectedRow(), 10).toString());
-        txtBairroDados.setText(tabelaDeClientes.getValueAt(tabelaDeClientes
-                .getSelectedRow(), 11).toString());
-        txtCidadeDados.setText(tabelaDeClientes.getValueAt(tabelaDeClientes
-                .getSelectedRow(), 12).toString());
-        comboUfDados.setSelectedItem(tabelaDeClientes.getValueAt(tabelaDeClientes
-                .getSelectedRow(), 13).toString());
-        */
+       
+        txtDescricao.setText(tabelaDeProdutos.
+        getValueAt(tabelaDeProdutos.getSelectedRow(), 1).toString());
+
+       txtPreco.setText(tabelaDeProdutos.
+               getValueAt(tabelaDeProdutos.getSelectedRow(), 2).toString());
+       
+       txtQuantidade.setText(tabelaDeProdutos.
+               getValueAt(tabelaDeProdutos.getSelectedRow(), 3).toString());
+       
         
-    }//GEN-LAST:event_tabelaDeClientesMouseClicked
+        
+    }//GEN-LAST:event_tabelaDeProdutosMouseClicked
 
     private void btnPesquisaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaClienteActionPerformed
         // Botao pesquisar na tabela de clientes
@@ -469,7 +434,7 @@ public class CadProd extends javax.swing.JFrame {
          EstoqueDAO dao = new EstoqueDAO();
     List<Estoque> lista = dao.buscaProdutoPorNome(nome);
         
-    DefaultTableModel dados = (DefaultTableModel) tabelaDeClientes.getModel();
+    DefaultTableModel dados = (DefaultTableModel) tabelaDeProdutos.getModel();
     dados.setNumRows(0);
     
     
@@ -494,7 +459,7 @@ public class CadProd extends javax.swing.JFrame {
          EstoqueDAO dao = new EstoqueDAO();
     List<Estoque> lista = dao.buscaProdutoPorNome(nome);
         
-    DefaultTableModel dados = (DefaultTableModel) tabelaDeClientes.getModel();
+    DefaultTableModel dados = (DefaultTableModel) tabelaDeProdutos.getModel();
     dados.setNumRows(0);
     
     
@@ -571,10 +536,6 @@ public class CadProd extends javax.swing.JFrame {
        }
     }//GEN-LAST:event_txtDescricaoKeyPressed
 
-    private void txtQuantidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQuantidadeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtQuantidadeActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -629,11 +590,11 @@ public class CadProd extends javax.swing.JFrame {
     private javax.swing.JPanel painelConsultaClientes;
     private javax.swing.JTabbedPane painelDaTabelaClientes;
     private javax.swing.JPanel painelDadosProduto;
-    private javax.swing.JTable tabelaDeClientes;
+    private javax.swing.JTable tabelaDeProdutos;
     private javax.swing.JTextField txtCodigoDados;
     private javax.swing.JTextField txtDescricao;
     private javax.swing.JTextField txtNomeConsultaCliente;
-    private javax.swing.JFormattedTextField txtPreco;
-    private javax.swing.JFormattedTextField txtQuantidade;
+    private javax.swing.JTextField txtPreco;
+    private javax.swing.JTextField txtQuantidade;
     // End of variables declaration//GEN-END:variables
 }

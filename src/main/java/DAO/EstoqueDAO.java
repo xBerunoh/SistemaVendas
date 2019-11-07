@@ -18,7 +18,7 @@ public class EstoqueDAO {
 
 	}
 public void adiciona(Estoque estoque ){
-		String sql = "insert into estoque" + "(descricao,preco,quantidade)" + "values (?,?,?)";
+		String sql = "insert into estoque" + "(descricao,preco,quantidade)" + "values (?, ?, ?)";
 		try {
                     PreparedStatement stmt = connection.prepareStatement(sql);
 
@@ -28,32 +28,34 @@ public void adiciona(Estoque estoque ){
                         stmt.setInt(3, estoque.getQuantidade());
                         stmt.execute();
 			stmt.close();
+                        JOptionPane.showMessageDialog(null, "inserido com sucesso!");
 
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}}
+		} catch (Exception e) {
+			
+                        JOptionPane.showMessageDialog(null, "ERRO: "+e);
+		}
+}
 public void altera(Estoque estoque) {
-		String sql = "update contato set descricao=?,preco=?,quantidade=? where id=?";
+		String sql = "update estoque set quantidade=?, descricao=?, preco=?  where id_produto=?;";
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
 
-			
-			stmt.setString(1, estoque.getDescricao());
-			stmt.setDouble(2, estoque.getPreco());
-			stmt.setInt(3, estoque.getQuantidade());
+			stmt.setInt(1, estoque.getQuantidade());
+			stmt.setString(2, estoque.getDescricao());
+			stmt.setDouble(3, estoque.getPreco());
 			stmt.setInt(4, estoque.getId_produto());
 
 			stmt.execute();
 			stmt.close();
 			JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
 
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
+		} catch (Exception e) {
+                            JOptionPane.showMessageDialog(null, e);
+                }
 	}
 public void remove(Estoque estoque) {
 		try {
-			PreparedStatement stmt = connection.prepareStatement("delete from estoque where id=?");
+			PreparedStatement stmt = connection.prepareStatement("delete from estoque where id_produto=?");
 
 			stmt.setInt(1, estoque.getId_produto());
 			stmt.execute();
@@ -73,19 +75,22 @@ public List<Estoque> getLista() {
 			List<Estoque> estoques = new ArrayList<Estoque>();
 			while (rs.next()) {
 				Estoque estoque = new Estoque();
-				estoque.setId_produto(rs.getInt("id"));
-				estoque.setDescricao(rs.getString("Descrição"));
-                                estoque.setPreco(rs.getDouble("Preço"));
-                                estoque.setQuantidade(rs.getInt("Quantidade"));
+				estoque.setId_produto(rs.getInt("id_produto"));
+				estoque.setDescricao(rs.getString("descricao"));
+                                estoque.setPreco(rs.getDouble("preco"));
+                                estoque.setQuantidade(rs.getInt("quantidade"));
 
 				estoques.add(estoque);
 			}
 			rs.close();
 			stmt.close();
 			return estoques;
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e);
+                           return null;
 		}
+     
+           
 	}
  public List<Estoque> buscaProdutoPorNome(String nome){
     
