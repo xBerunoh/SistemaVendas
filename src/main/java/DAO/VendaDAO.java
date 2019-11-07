@@ -1,8 +1,6 @@
 package DAO;
 
 import JDBC.ConnectionFactory;
-import MODEL.Estoque;
-import MODEL.Funcionario;
 import MODEL.Venda;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -43,8 +41,8 @@ public void altera(Venda venda) {
 
 			
 			
-			stmt.setString(1, venda.getQuantidade_item());
-			stmt.setString(2, funcionario.getNome());
+			stmt.setInt(1, venda.getQuantidade_item());
+			stmt.setDouble(2,venda.getValor_total());
 			stmt.setInt(3, venda.getId_venda());
 
 			stmt.execute();
@@ -55,11 +53,11 @@ public void altera(Venda venda) {
 			throw new RuntimeException(e);
 		}
 	}
-public void remove(Funcionario funcionario) {
+public void remove(Venda venda) {
 		try {
-			PreparedStatement stmt = connection.prepareStatement("delete from funcionario where id=?");
+			PreparedStatement stmt = connection.prepareStatement("delete from venda where id=?");
 
-			stmt.setInt(1, funcionario.getId_funcionario());
+			stmt.setInt(1, venda.getId_venda());
 			stmt.execute();
 			stmt.close();
 
@@ -69,24 +67,23 @@ public void remove(Funcionario funcionario) {
 			JOptionPane.showMessageDialog(null, e);
 		}
 	}
-public List<Funcionario> getLista() {
+public List<Venda> getLista() {
 		try {
 
-			PreparedStatement stmt = this.connection.prepareStatement("select * from funcionario");
+			PreparedStatement stmt = this.connection.prepareStatement("select * from venda");
 			ResultSet rs = stmt.executeQuery();
-			List<Funcionario> funcionarios = new ArrayList<Funcionario>();
+			List<Venda> vendas= new ArrayList<Venda>();
 			while (rs.next()) {
-				Funcionario funcionario = new Funcionario();
-				funcionario.setId_funcionario(rs.getInt("id"));
-				funcionario.setFuncao(rs.getString("Fução"));
-                                funcionario.setNome(rs.getString("Nome"));
+				Venda venda= new Venda();
+				venda.setId_venda(rs.getInt("id"));
+				venda.setValor_total(rs.getDouble("Valor Total"));
                                 
 
-				funcionarios.add(funcionario);
+				vendas.add(venda);
 			}
 			rs.close();
 			stmt.close();
-			return funcionarios;
+			return vendas;
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
