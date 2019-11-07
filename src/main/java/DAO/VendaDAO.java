@@ -36,7 +36,7 @@ public void adiciona(Venda venda){
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}}
-public void altera(Venda venda) {
+/*public void altera(Venda venda) {
 		String sql = "update venda set quantidade_item=?,valor_total=? where id=?";
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
@@ -54,7 +54,7 @@ public void altera(Venda venda) {
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
-	}
+	}*/
 public void remove(Funcionario funcionario) {
 		try {
 			PreparedStatement stmt = connection.prepareStatement("delete from funcionario where id=?");
