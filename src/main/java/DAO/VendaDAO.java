@@ -34,7 +34,7 @@ public void adiciona(Venda venda){
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}}
-/*public void altera(Venda venda) {
+public void altera(Venda venda) {
 		String sql = "update venda set quantidade_item=?,valor_total=? where id=?";
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
@@ -76,6 +76,10 @@ public List<Venda> getLista() {
 			while (rs.next()) {
 				Venda venda= new Venda();
 				venda.setId_venda(rs.getInt("id"));
+                                venda.setQuantidade_item(rs.getInt("Quantidade"));
+                                venda.setFk_funcionario(rs.getInt("Funcionario(ID)"));
+                                venda.setFk_estoque(rs.getInt("Estoque(ID)"));
+  
 				venda.setValor_total(rs.getDouble("Valor Total"));
                                 
 
