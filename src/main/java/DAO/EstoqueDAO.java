@@ -87,6 +87,79 @@ public List<Estoque> getLista() {
 			throw new RuntimeException(e);
 		}
 	}
+ public List<Estoque> buscaProdutoPorNome(String nome){
+    
+       try {
+            
+            List<Estoque> lista = new ArrayList<>();
+            String sql= "select * from Estoque where descricao like ?";
+            PreparedStatement pst = connection.prepareStatement(sql);
+            pst.setString(1, nome);
+            ResultSet rs = pst.executeQuery();
+            
+            while(rs.next()){
+            
+            Estoque obj = new Estoque();
+            
+            obj.setId_produto(rs.getInt("id_produto"));
+            obj.setQuantidade(rs.getInt("quantidade"));
+            obj.setDescricao(rs.getString("descricao"));
+            obj.setPreco(rs.getDouble("preco"));
+            
+            
+            
+            lista.add(obj);
+            
+            
+            
+            }
+            
+           return lista;
+            
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+            return null;
+        }
+    
+    }
+  public Estoque consultaPorNome(String nome){
+        try {
+ 
+            String sql= "select * from estoque where descricao like ?";
+            PreparedStatement pst = connection.prepareStatement(sql);
+            pst.setString(1, nome);
+            ResultSet rs = pst.executeQuery();   
+            Estoque obj = new Estoque();
+
+             if(rs.next()){
+            
+            
+             obj.setId_produto(rs.getInt("id_produto"));
+            obj.setQuantidade(rs.getInt("quantidade"));
+            obj.setDescricao(rs.getString("descricao"));
+            obj.setPreco(rs.getDouble("preco"));
+            
+            
+            
+            
+            }
+             return obj;
+        
+        
+        
+        
+        } catch (Exception e) {
+            
+            JOptionPane.showMessageDialog(null,"Erro, cliente não encontrado,"
+                    + "para mais detalhes segue o codigo detalhado: \n"+ e);
+            return null;
+            
+            
+        }
+    }
+    
+
 }
 
 

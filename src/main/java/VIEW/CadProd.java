@@ -3,11 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.devworks.view;
+package VIEW;
 
-import br.com.devworks.dao.ClientesDAO;
-import br.com.devworks.model.Clientes;
-import br.com.devworks.model.utilitarios;
+import MODEL.Estoque;
+import DAO.EstoqueDAO;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -22,30 +21,20 @@ public class CadProd extends javax.swing.JFrame {
     //listando dados da tabela
     public void listar(){
     
-    ClientesDAO dao = new ClientesDAO();
-    List<Clientes> lista = dao.listarClientes();
+    EstoqueDAO dao = new EstoqueDAO();
+    List<Estoque> lista = dao.getLista();
         
     DefaultTableModel dados = (DefaultTableModel) tabelaDeClientes.getModel();
     dados.setNumRows(0);
     
     
-    for(Clientes c: lista){
+    for(Estoque c: lista){
         
         dados.addRow(new Object[]{
-            c.getId(),
-            c.getNome(),
-            c.getRg(),
-            c.getCpf(),
-            c.getEmail(),
-            c.getTelefone(),
-            c.getCelular(),
-            c.getCep(),
-            c.getEndereco(),
-            c.getNumero(),
-            c.getComplemento(),
-            c.getBairro(),
-            c.getCidade(),
-            c.getUf()
+            c.getId_produto(),
+            c.getDescricao(),
+            c.getPreco(),
+            c.getQuantidade()
                 
             
                 
@@ -72,16 +61,16 @@ public class CadProd extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         painelDaTabelaClientes = new javax.swing.JTabbedPane();
-        painelDadosPessoais = new javax.swing.JPanel();
+        painelDadosProduto = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txtCodigoDados = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txtNomeDados = new javax.swing.JTextField();
+        txtDescricao = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        txtEmailDados = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
-        txtNumeroDados = new javax.swing.JTextField();
         btnPesquisaNomeDadosPessoais = new javax.swing.JButton();
+        txtPreco = new javax.swing.JFormattedTextField();
+        txtQuantidade = new javax.swing.JFormattedTextField();
         painelConsultaClientes = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaDeClientes = new javax.swing.JTable();
@@ -138,32 +127,18 @@ public class CadProd extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel3.setText("Descrição:");
 
-        txtNomeDados.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        txtNomeDados.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtDescricao.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtDescricao.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtNomeDadosKeyPressed(evt);
+                txtDescricaoKeyPressed(evt);
             }
         });
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel4.setText("Quantidade:");
 
-        txtEmailDados.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        txtEmailDados.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEmailDadosActionPerformed(evt);
-            }
-        });
-
         jLabel15.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel15.setText("Preço:");
-
-        txtNumeroDados.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        txtNumeroDados.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNumeroDadosActionPerformed(evt);
-            }
-        });
 
         btnPesquisaNomeDadosPessoais.setText("Pesquisar");
         btnPesquisaNomeDadosPessoais.addActionListener(new java.awt.event.ActionListener() {
@@ -172,58 +147,75 @@ public class CadProd extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout painelDadosPessoaisLayout = new javax.swing.GroupLayout(painelDadosPessoais);
-        painelDadosPessoais.setLayout(painelDadosPessoaisLayout);
-        painelDadosPessoaisLayout.setHorizontalGroup(
-            painelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(painelDadosPessoaisLayout.createSequentialGroup()
+        try {
+            txtPreco.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            txtQuantidade.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtQuantidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtQuantidadeActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout painelDadosProdutoLayout = new javax.swing.GroupLayout(painelDadosProduto);
+        painelDadosProduto.setLayout(painelDadosProdutoLayout);
+        painelDadosProdutoLayout.setHorizontalGroup(
+            painelDadosProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelDadosProdutoLayout.createSequentialGroup()
                 .addGap(40, 40, 40)
-                .addGroup(painelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(painelDadosPessoaisLayout.createSequentialGroup()
+                .addGroup(painelDadosProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(painelDadosProdutoLayout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
-                        .addComponent(txtNomeDados, javax.swing.GroupLayout.DEFAULT_SIZE, 1079, Short.MAX_VALUE)
+                        .addComponent(txtDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, 1079, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnPesquisaNomeDadosPessoais)
                         .addGap(54, 54, 54))
-                    .addGroup(painelDadosPessoaisLayout.createSequentialGroup()
-                        .addGroup(painelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(painelDadosPessoaisLayout.createSequentialGroup()
+                    .addGroup(painelDadosProdutoLayout.createSequentialGroup()
+                        .addGroup(painelDadosProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(painelDadosProdutoLayout.createSequentialGroup()
                                 .addComponent(jLabel4)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtEmailDados, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(29, 29, 29)
                                 .addComponent(jLabel15)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtNumeroDados, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(painelDadosPessoaisLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(painelDadosProdutoLayout.createSequentialGroup()
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtCodigoDados, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(1038, Short.MAX_VALUE))))
         );
-        painelDadosPessoaisLayout.setVerticalGroup(
-            painelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(painelDadosPessoaisLayout.createSequentialGroup()
+        painelDadosProdutoLayout.setVerticalGroup(
+            painelDadosProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelDadosProdutoLayout.createSequentialGroup()
                 .addGap(45, 45, 45)
-                .addGroup(painelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(painelDadosProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCodigoDados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(painelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(painelDadosProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNomeDados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPesquisaNomeDadosPessoais))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(painelDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(painelDadosProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtEmailDados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNumeroDados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(170, Short.MAX_VALUE))
         );
 
-        painelDaTabelaClientes.addTab("Dados pessoais", painelDadosPessoais);
+        painelDaTabelaClientes.addTab("Dados do Produto", painelDadosProduto);
 
         tabelaDeClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -361,41 +353,24 @@ public class CadProd extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCodigoDadosActionPerformed
 
-    private void txtEmailDadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailDadosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtEmailDadosActionPerformed
-
     private void txtNomeConsultaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeConsultaClienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNomeConsultaClienteActionPerformed
 
-    private void txtNumeroDadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroDadosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNumeroDadosActionPerformed
-
     private void btnSalvarCadCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarCadCliActionPerformed
         // TODO add your handling code here:
-
+        double precoProduto = Double.parseDouble(txtPreco.getText());
+        int quantiaProduto = Integer.parseInt(txtQuantidade.getText());
         try {
 
-            Clientes obj = new Clientes();
-            obj.setNome(txtNomeDados.getText());
-            obj.setRg(txtRgDados.getText());
-            obj.setCpf(txtCpfDados.getText());
-            obj.setEmail(txtEmailDados.getText());
-            obj.setTelefone(txtTelefonedados.getText());
-            obj.setCelular(txtCelularDados.getText());
-            obj.setCep(txtCepDados.getText());
-            obj.setEndereco(txtEnderecoDados.getText());
-            obj.setNumero(Integer.parseInt(txtNumeroDados.getText()));
-            obj.setComplemento(txtComplementoDados.getText());
-            obj.setBairro(txtBairroDados.getText());
-            obj.setCidade(txtCidadeDados.getText());
-            obj.setUf(comboUfDados.getSelectedItem().toString());
-            
-            ClientesDAO dao = new ClientesDAO();
-            dao.cadastrarCliente(obj);
-                        new utilitarios().LimpaTela(painelDadosPessoais);
+        Estoque estoque = new Estoque();
+        estoque.setDescricao(txtDescricao.getText());
+        estoque.setPreco(precoProduto);
+        estoque.setQuantidade(quantiaProduto);
+        
+            EstoqueDAO dao = new EstoqueDAO();
+            dao.adiciona(estoque);
+                        new utilitarios().LimpaTela(painelDadosProduto);
 
 
         } catch (Exception e) {
@@ -412,12 +387,12 @@ public class CadProd extends javax.swing.JFrame {
 
     private void btnExcluirCadCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirCadCliActionPerformed
                 try {
-                  Clientes obj = new Clientes();
+                 Estoque obj = new Estoque();
 
-                 obj.setId(Integer.parseInt(txtCodigoDados.getText()));
-                      ClientesDAO dao = new ClientesDAO();
-                      dao.excluirCliente(obj);
-            new utilitarios().LimpaTela(painelDadosPessoais);
+                 obj.setId_produto(Integer.parseInt(txtCodigoDados.getText()));
+                      EstoqueDAO dao = new EstoqueDAO();
+                      dao.remove(obj);
+            new utilitarios().LimpaTela(painelDadosProduto);
 
             
         } catch (Exception e) {
@@ -427,29 +402,17 @@ public class CadProd extends javax.swing.JFrame {
 
     private void btnEditarCadCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarCadCliActionPerformed
         // TODO add your handling code here:
-        
-
+        double precoProduto = Double.parseDouble(txtPreco.getText());
+        int quantidadeProd = Integer.parseInt(txtQuantidade.getText());
         try {
 
-            Clientes obj = new Clientes();
-            obj.setNome(txtNomeDados.getText());
-            obj.setRg(txtRgDados.getText());
-            obj.setCpf(txtCpfDados.getText());
-            obj.setEmail(txtEmailDados.getText());
-            obj.setTelefone(txtTelefonedados.getText());
-            obj.setCelular(txtCelularDados.getText());
-            obj.setCep(txtCepDados.getText());
-            obj.setEndereco(txtEnderecoDados.getText());
-            obj.setNumero(Integer.parseInt(txtNumeroDados.getText()));
-            obj.setComplemento(txtComplementoDados.getText());
-            obj.setBairro(txtBairroDados.getText());
-            obj.setCidade(txtCidadeDados.getText());
-            obj.setUf(comboUfDados.getSelectedItem().toString());
-            obj.setId(Integer.parseInt(txtCodigoDados.getText()));
-            
-            ClientesDAO dao = new ClientesDAO();
-            dao.alterarCliente(obj);
-            new utilitarios().LimpaTela(painelDadosPessoais);
+            Estoque obj = new Estoque();
+            obj.setDescricao(txtDescricao.getText());
+            obj.setPreco(precoProduto);
+            obj.setQuantidade(quantidadeProd);
+            EstoqueDAO dao = new EstoqueDAO();
+            dao.altera(obj);
+            new utilitarios().LimpaTela(painelDadosProduto);
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e);
@@ -465,7 +428,7 @@ public class CadProd extends javax.swing.JFrame {
 
     private void tabelaDeClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaDeClientesMouseClicked
         // passar dados da tabela para o painel de Dados Pessoais
-        painelDaTabelaClientes.setSelectedIndex(0);
+       /* painelDaTabelaClientes.setSelectedIndex(0);
         txtCodigoDados.setText(tabelaDeClientes.getValueAt(tabelaDeClientes
                 .getSelectedRow(), 0).toString());
         
@@ -495,7 +458,7 @@ public class CadProd extends javax.swing.JFrame {
                 .getSelectedRow(), 12).toString());
         comboUfDados.setSelectedItem(tabelaDeClientes.getValueAt(tabelaDeClientes
                 .getSelectedRow(), 13).toString());
-        
+        */
         
     }//GEN-LAST:event_tabelaDeClientesMouseClicked
 
@@ -503,97 +466,71 @@ public class CadProd extends javax.swing.JFrame {
         // Botao pesquisar na tabela de clientes
         
         String nome = "%"+txtNomeConsultaCliente.getText()+"%";
-         ClientesDAO dao = new ClientesDAO();
-    List<Clientes> lista = dao.buscaClientePorNome(nome);
+         EstoqueDAO dao = new EstoqueDAO();
+    List<Estoque> lista = dao.buscaProdutoPorNome(nome);
         
     DefaultTableModel dados = (DefaultTableModel) tabelaDeClientes.getModel();
     dados.setNumRows(0);
     
     
-    for(Clientes c: lista){
+  for(Estoque c: lista){
         
         dados.addRow(new Object[]{
-            c.getId(),
-            c.getNome(),
-            c.getRg(),
-            c.getCpf(),
-            c.getEmail(),
-            c.getTelefone(),
-            c.getCelular(),
-            c.getCep(),
-            c.getEndereco(),
-            c.getNumero(),
-            c.getComplemento(),
-            c.getBairro(),
-            c.getCidade(),
-            c.getUf()
+            c.getId_produto(),
+            c.getDescricao(),
+            c.getPreco(),
+            c.getQuantidade()
                 
             
                 
         });
+    
     }
     }//GEN-LAST:event_btnPesquisaClienteActionPerformed
 
     private void txtNomeConsultaClienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeConsultaClienteKeyPressed
         // Pesquisa enquanto digita
          String nome = "%"+txtNomeConsultaCliente.getText()+"%";
-         ClientesDAO dao = new ClientesDAO();
-    List<Clientes> lista = dao.buscaClientePorNome(nome);
+         EstoqueDAO dao = new EstoqueDAO();
+    List<Estoque> lista = dao.buscaProdutoPorNome(nome);
         
     DefaultTableModel dados = (DefaultTableModel) tabelaDeClientes.getModel();
     dados.setNumRows(0);
     
     
-    for(Clientes c: lista){
+    for(Estoque c: lista){
         
         dados.addRow(new Object[]{
-            c.getId(),
-            c.getNome(),
-            c.getRg(),
-            c.getCpf(),
-            c.getEmail(),
-            c.getTelefone(),
-            c.getCelular(),
-            c.getCep(),
-            c.getEndereco(),
-            c.getNumero(),
-            c.getComplemento(),
-            c.getBairro(),
-            c.getCidade(),
-            c.getUf()
+            c.getId_produto(),
+            c.getDescricao(),
+            c.getPreco(),
+            c.getQuantidade()
                 
             
                 
         });
+    
     }
     }//GEN-LAST:event_txtNomeConsultaClienteKeyPressed
 
     private void btnPesquisaNomeDadosPessoaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaNomeDadosPessoaisActionPerformed
         // Pesquisar na tela dados pessoais
         try {
-            String nome = txtNomeDados.getText();
-            Clientes obj = new Clientes();
-            ClientesDAO dao = new ClientesDAO();
+            String nome = txtDescricao.getText();
+            Estoque obj = new Estoque();
+            EstoqueDAO dao = new EstoqueDAO();
             
             obj = dao.consultaPorNome(nome);
-            if(obj.getNome() != null){
-            txtCodigoDados.setText(String.valueOf(obj.getId()));
+            if(obj.getDescricao()!= null){
+            txtCodigoDados.setText(String.valueOf(obj.getId_produto()));
             
-               txtNomeDados.setText(obj.getNome());
-        txtRgDados.setText(obj.getRg());
-        txtCpfDados.setText(obj.getCpf());
-        txtEmailDados.setText(obj.getEmail());
-        txtTelefonedados.setText(obj.getTelefone());
-        txtCelularDados.setText(obj.getCelular());
-        txtCepDados.setText(obj.getCep());
-        txtEnderecoDados.setText(obj.getEndereco());
-        txtNumeroDados.setText(Integer.toString(obj.getNumero()));
-        txtComplementoDados.setText(obj.getComplemento());
-        txtBairroDados.setText(obj.getBairro());
-        txtCidadeDados.setText(obj.getCidade());
-        comboUfDados.setSelectedItem(obj.getUf());
+               String precoString = Double.toString(obj.getPreco());
+        String quantidadeString = Integer.toString(obj.getQuantidade());
+               txtDescricao.setText(obj.getDescricao());
+               txtPreco.setText(precoString);
+               txtQuantidade.setText(quantidadeString);
             }else{
-            JOptionPane.showMessageDialog(null, "CLIENTE NÃO ENCONTRADO");
+            JOptionPane.showMessageDialog(null, "PRODUTO NÃO ENCONTRADO");
             
             }
             
@@ -603,32 +540,27 @@ public class CadProd extends javax.swing.JFrame {
            
     }//GEN-LAST:event_btnPesquisaNomeDadosPessoaisActionPerformed
 
-    private void txtNomeDadosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeDadosKeyPressed
-       if (evt.getKeyCode() == KeyEvent.VK_ENTER) { 
-        try {
-            String nome = txtNomeDados.getText();
-            Clientes obj = new Clientes();
-            ClientesDAO dao = new ClientesDAO();
+    private void txtDescricaoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescricaoKeyPressed
+      
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) { 
+      try {
+            String nome = txtDescricao.getText();
+            Estoque obj = new Estoque();
+            EstoqueDAO dao = new EstoqueDAO();
             
             obj = dao.consultaPorNome(nome);
-            if(obj.getNome() != null){
-            txtCodigoDados.setText(String.valueOf(obj.getId()));
+            if(obj.getDescricao()!= null){
+            txtCodigoDados.setText(String.valueOf(obj.getId_produto()));
+                
             
-               txtNomeDados.setText(obj.getNome());
-        txtRgDados.setText(obj.getRg());
-        txtCpfDados.setText(obj.getCpf());
-        txtEmailDados.setText(obj.getEmail());
-        txtTelefonedados.setText(obj.getTelefone());
-        txtCelularDados.setText(obj.getCelular());
-        txtCepDados.setText(obj.getCep());
-        txtEnderecoDados.setText(obj.getEndereco());
-        txtNumeroDados.setText(Integer.toString(obj.getNumero()));
-        txtComplementoDados.setText(obj.getComplemento());
-        txtBairroDados.setText(obj.getBairro());
-        txtCidadeDados.setText(obj.getCidade());
-        comboUfDados.setSelectedItem(obj.getUf());
+        String precoString = Double.toString(obj.getPreco());
+        String quantidadeString = Integer.toString(obj.getQuantidade());
+               txtDescricao.setText(obj.getDescricao());
+               txtPreco.setText(precoString);
+               txtQuantidade.setText(quantidadeString);
+               
             }else{
-            JOptionPane.showMessageDialog(null, "CLIENTE NÃO ENCONTRADO");
+            JOptionPane.showMessageDialog(null, "PRODUTO NÃO ENCONTRADO");
             
             }
             
@@ -637,7 +569,11 @@ public class CadProd extends javax.swing.JFrame {
         }
        
        }
-    }//GEN-LAST:event_txtNomeDadosKeyPressed
+    }//GEN-LAST:event_txtDescricaoKeyPressed
+
+    private void txtQuantidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQuantidadeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtQuantidadeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -692,12 +628,12 @@ public class CadProd extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel painelConsultaClientes;
     private javax.swing.JTabbedPane painelDaTabelaClientes;
-    private javax.swing.JPanel painelDadosPessoais;
+    private javax.swing.JPanel painelDadosProduto;
     private javax.swing.JTable tabelaDeClientes;
     private javax.swing.JTextField txtCodigoDados;
-    private javax.swing.JTextField txtEmailDados;
+    private javax.swing.JTextField txtDescricao;
     private javax.swing.JTextField txtNomeConsultaCliente;
-    private javax.swing.JTextField txtNomeDados;
-    private javax.swing.JTextField txtNumeroDados;
+    private javax.swing.JFormattedTextField txtPreco;
+    private javax.swing.JFormattedTextField txtQuantidade;
     // End of variables declaration//GEN-END:variables
 }
