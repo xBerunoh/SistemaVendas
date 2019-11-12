@@ -8,10 +8,10 @@ package VIEW;
 import MODEL.Estoque;
 import DAO.EstoqueDAO;
 import DAO.FuncionarioDAO;
-<<<<<<< HEAD
-=======
+
+
 import DAO.VendaDAO;
->>>>>>> master
+
 import MODEL.Funcionario;
 import MODEL.Venda;
 import java.awt.event.KeyEvent;
@@ -55,7 +55,7 @@ public class VendaProd extends javax.swing.JFrame {
     public VendaProd() {
         initComponents();
     }
-<<<<<<< HEAD
+
     public void listarFuncionario(){
     
     FuncionarioDAO dao = new FuncionarioDAO();
@@ -80,8 +80,7 @@ public class VendaProd extends javax.swing.JFrame {
     }
     
         
-    
-=======
+    }
     public void mostraPreco(){
     double preco = Double.parseDouble(txtPreco.getText());
         int quantia = Integer.parseInt(txtQuantidade.getText());
@@ -89,7 +88,7 @@ public class VendaProd extends javax.swing.JFrame {
         double valorTot = quantia*PrecoUnitario;
         String precostr = String.valueOf(valorTot);
         txtPreco.setText(precostr);
->>>>>>> master
+
     }
 
     /**
@@ -476,11 +475,7 @@ public class VendaProd extends javax.swing.JFrame {
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
        ///caregar a lista
        listar();
-<<<<<<< HEAD
-       listarFuncionario();
-=======
-       
->>>>>>> master
+
         
     }//GEN-LAST:event_formWindowActivated
 
@@ -633,7 +628,7 @@ public class VendaProd extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnFinalVendaActionPerformed
 
-<<<<<<< HEAD
+
     private void TabelaFuncionarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelaFuncionarioMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_TabelaFuncionarioMouseClicked
@@ -649,7 +644,7 @@ public class VendaProd extends javax.swing.JFrame {
     private void BotaoFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoFuncionarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BotaoFuncionarioActionPerformed
-=======
+
     private void btnPesquisaFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaFuncionarioActionPerformed
   // Pesquisar na tela Dados Funcionario
         try {
@@ -674,7 +669,7 @@ public class VendaProd extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         mostraPreco();
     }//GEN-LAST:event_jButton1ActionPerformed
->>>>>>> master
+
 
     /**
      * @param args the command line arguments
