@@ -7,6 +7,8 @@ package VIEW;
 
 import MODEL.Estoque;
 import DAO.EstoqueDAO;
+import DAO.FuncionarioDAO;
+import MODEL.Funcionario;
 import MODEL.Venda;
 import java.awt.event.KeyEvent;
 import java.util.List;
@@ -49,6 +51,32 @@ public class VendaProd extends javax.swing.JFrame {
     public VendaProd() {
         initComponents();
     }
+    public void listarFuncionario(){
+    
+    FuncionarioDAO dao = new FuncionarioDAO();
+    List<Funcionario> lista = dao.getLista();
+        
+    DefaultTableModel dados = (DefaultTableModel) TabelaFuncionario.getModel();
+    dados.setNumRows(0);
+    
+    
+    for(Funcionario c: lista){
+        
+        dados.addRow(new Object[]{
+            c.getId_funcionario(),
+            c.getFuncao(),
+            c.getNome(),
+           
+                
+            
+                
+        });
+    
+    }
+    
+        
+    
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -82,6 +110,11 @@ public class VendaProd extends javax.swing.JFrame {
         txtNomeConsultaCliente = new javax.swing.JTextField();
         btnPesquisaCliente = new javax.swing.JToggleButton();
         jPanel2 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        TabelaFuncionario = new javax.swing.JTable();
+        jLabel16 = new javax.swing.JLabel();
+        PesquisaFuncionario = new javax.swing.JTextField();
+        BotaoFuncionario = new javax.swing.JToggleButton();
         btnFinalVenda = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -291,15 +324,70 @@ public class VendaProd extends javax.swing.JFrame {
 
         painelDaTabelaClientes.addTab("Consulta de Estoque", painelConsultaClientes);
 
+        TabelaFuncionario.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Código", "Função", "Nome"
+            }
+        ));
+        TabelaFuncionario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TabelaFuncionarioMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(TabelaFuncionario);
+
+        jLabel16.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel16.setText("Nome:");
+
+        PesquisaFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PesquisaFuncionarioActionPerformed(evt);
+            }
+        });
+        PesquisaFuncionario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                PesquisaFuncionarioKeyPressed(evt);
+            }
+        });
+
+        BotaoFuncionario.setText("Pesquisar");
+        BotaoFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotaoFuncionarioActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1388, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel16)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(PesquisaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BotaoFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(881, Short.MAX_VALUE))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 320, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel16)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(PesquisaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BotaoFuncionario)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         painelDaTabelaClientes.addTab("Consulta de Funcionarios", jPanel2);
@@ -316,7 +404,7 @@ public class VendaProd extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(painelDaTabelaClientes, javax.swing.GroupLayout.DEFAULT_SIZE, 1390, Short.MAX_VALUE)
+            .addComponent(painelDaTabelaClientes)
             .addGroup(layout.createSequentialGroup()
                 .addGap(417, 417, 417)
                 .addComponent(btnFinalVenda)
@@ -348,6 +436,7 @@ public class VendaProd extends javax.swing.JFrame {
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
        ///caregar a lista
        listar();
+       listarFuncionario();
         
     }//GEN-LAST:event_formWindowActivated
 
@@ -496,6 +585,22 @@ public class VendaProd extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnFinalVendaActionPerformed
 
+    private void TabelaFuncionarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelaFuncionarioMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TabelaFuncionarioMouseClicked
+
+    private void PesquisaFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PesquisaFuncionarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PesquisaFuncionarioActionPerformed
+
+    private void PesquisaFuncionarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PesquisaFuncionarioKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PesquisaFuncionarioKeyPressed
+
+    private void BotaoFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoFuncionarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BotaoFuncionarioActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -535,6 +640,9 @@ public class VendaProd extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton BotaoFuncionario;
+    private javax.swing.JTextField PesquisaFuncionario;
+    private javax.swing.JTable TabelaFuncionario;
     private javax.swing.JButton btnFinalVenda;
     private javax.swing.JToggleButton btnPesquisaCliente;
     private javax.swing.JButton btnPesquisaNomeDadosPessoais;
@@ -542,6 +650,7 @@ public class VendaProd extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -550,6 +659,7 @@ public class VendaProd extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel painelConsultaClientes;
     private javax.swing.JTabbedPane painelDaTabelaClientes;
     private javax.swing.JPanel painelDadosProduto;
