@@ -122,13 +122,13 @@ public class VendaProd extends javax.swing.JFrame {
         txtNomeFunc = new javax.swing.JTextField();
         btnPesquisaFuncionario = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        painelConsultaClientes = new javax.swing.JPanel();
+        painelConsultaEstoque = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaDeProdutos = new javax.swing.JTable();
         jLabel14 = new javax.swing.JLabel();
         txtNomeConsultaCliente = new javax.swing.JTextField();
         btnPesquisaCliente = new javax.swing.JToggleButton();
-        jPanel2 = new javax.swing.JPanel();
+        painelConsultaFuncionario = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         TabelaFuncionario = new javax.swing.JTable();
         jLabel16 = new javax.swing.JLabel();
@@ -348,11 +348,11 @@ public class VendaProd extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout painelConsultaClientesLayout = new javax.swing.GroupLayout(painelConsultaClientes);
-        painelConsultaClientes.setLayout(painelConsultaClientesLayout);
-        painelConsultaClientesLayout.setHorizontalGroup(
-            painelConsultaClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(painelConsultaClientesLayout.createSequentialGroup()
+        javax.swing.GroupLayout painelConsultaEstoqueLayout = new javax.swing.GroupLayout(painelConsultaEstoque);
+        painelConsultaEstoque.setLayout(painelConsultaEstoqueLayout);
+        painelConsultaEstoqueLayout.setHorizontalGroup(
+            painelConsultaEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelConsultaEstoqueLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -362,20 +362,20 @@ public class VendaProd extends javax.swing.JFrame {
                 .addContainerGap(881, Short.MAX_VALUE))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
-        painelConsultaClientesLayout.setVerticalGroup(
-            painelConsultaClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelConsultaClientesLayout.createSequentialGroup()
+        painelConsultaEstoqueLayout.setVerticalGroup(
+            painelConsultaEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelConsultaEstoqueLayout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addGroup(painelConsultaClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(painelConsultaEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel14)
-                    .addGroup(painelConsultaClientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(painelConsultaEstoqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtNomeConsultaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnPesquisaCliente)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        painelDaTabelaClientes.addTab("Consulta de Estoque", painelConsultaClientes);
+        painelDaTabelaClientes.addTab("Consulta de Estoque", painelConsultaEstoque);
 
         TabelaFuncionario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -416,11 +416,11 @@ public class VendaProd extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout painelConsultaFuncionarioLayout = new javax.swing.GroupLayout(painelConsultaFuncionario);
+        painelConsultaFuncionario.setLayout(painelConsultaFuncionarioLayout);
+        painelConsultaFuncionarioLayout.setHorizontalGroup(
+            painelConsultaFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelConsultaFuncionarioLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel16)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -430,20 +430,20 @@ public class VendaProd extends javax.swing.JFrame {
                 .addContainerGap(881, Short.MAX_VALUE))
             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+        painelConsultaFuncionarioLayout.setVerticalGroup(
+            painelConsultaFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelConsultaFuncionarioLayout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(painelConsultaFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel16)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(painelConsultaFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(PesquisaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(BotaoFuncionario)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        painelDaTabelaClientes.addTab("Consulta de Funcionarios", jPanel2);
+        painelDaTabelaClientes.addTab("Consulta de Funcionarios", painelConsultaFuncionario);
 
         btnFinalVenda.setText("Finalizar Venda");
         btnFinalVenda.addActionListener(new java.awt.event.ActionListener() {
@@ -648,8 +648,15 @@ public class VendaProd extends javax.swing.JFrame {
 
 
     private void TabelaFuncionarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelaFuncionarioMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TabelaFuncionarioMouseClicked
+painelDaTabelaClientes.setSelectedIndex(0);
+        txtCodFuncionario.setText(TabelaFuncionario.getValueAt(TabelaFuncionario
+                .getSelectedRow(), 0).toString());
+        
+       
+        txtNomeFunc.setText(TabelaFuncionario.
+        getValueAt(TabelaFuncionario.getSelectedRow(), 2).toString());
+
+          }//GEN-LAST:event_TabelaFuncionarioMouseClicked
 
     private void PesquisaFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PesquisaFuncionarioActionPerformed
         // TODO add your handling code here:
@@ -774,10 +781,10 @@ public class VendaProd extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JPanel painelConsultaClientes;
+    private javax.swing.JPanel painelConsultaEstoque;
+    private javax.swing.JPanel painelConsultaFuncionario;
     private javax.swing.JTabbedPane painelDaTabelaClientes;
     private javax.swing.JPanel painelDadosProduto;
     private javax.swing.JTable tabelaDeProdutos;
