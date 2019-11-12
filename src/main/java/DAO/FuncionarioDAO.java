@@ -74,9 +74,9 @@ public List<Funcionario> getLista() {
 			List<Funcionario> funcionarios = new ArrayList<Funcionario>();
 			while (rs.next()) {
 				Funcionario funcionario = new Funcionario();
-				funcionario.setId_funcionario(rs.getInt("id"));
-				funcionario.setFuncao(rs.getString("Fução"));
-                                funcionario.setNome(rs.getString("Nome"));
+				funcionario.setId_funcionario(rs.getInt("id_funcionario"));
+				funcionario.setFuncao(rs.getString("funcao"));
+                                funcionario.setNome(rs.getString("nome"));
                                 
 
 				funcionarios.add(funcionario);

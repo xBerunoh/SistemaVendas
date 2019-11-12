@@ -233,6 +233,7 @@
                 </Property>
               </Properties>
               <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDescricaoActionPerformed"/>
                 <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtDescricaoKeyPressed"/>
               </Events>
             </Component>
@@ -283,6 +284,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtNomeFunc">
+              <Events>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNomeFuncKeyPressed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnPesquisaFuncionario">
               <Properties>

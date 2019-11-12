@@ -182,6 +182,11 @@ public class VendaProd extends javax.swing.JFrame {
         jLabel3.setText("Descrição:");
 
         txtDescricao.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        txtDescricao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDescricaoActionPerformed(evt);
+            }
+        });
         txtDescricao.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtDescricaoKeyPressed(evt);
@@ -208,6 +213,12 @@ public class VendaProd extends javax.swing.JFrame {
         jLabel6.setText("Codigo Funcionário: ");
 
         txtCodFuncionario.setEditable(false);
+
+        txtNomeFunc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNomeFuncKeyPressed(evt);
+            }
+        });
 
         btnPesquisaFuncionario.setText("Pesquisa");
         btnPesquisaFuncionario.addActionListener(new java.awt.event.ActionListener() {
@@ -478,6 +489,7 @@ public class VendaProd extends javax.swing.JFrame {
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
        ///caregar a lista
        listar();
+       listarFuncionario();
 
         
     }//GEN-LAST:event_formWindowActivated
@@ -598,7 +610,7 @@ public class VendaProd extends javax.swing.JFrame {
         String quantidadeString = Integer.toString(obj.getQuantidade());
                txtDescricao.setText(obj.getDescricao());
                txtPreco.setText(precoString);
-               txtQuantidade.setText(quantidadeString);
+               txtQuantidade.setText("1");
                
             }else{
             JOptionPane.showMessageDialog(null, "PRODUTO NÃO ENCONTRADO");
@@ -675,6 +687,34 @@ public class VendaProd extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         mostraPreco();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtNomeFuncKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeFuncKeyPressed
+  if (evt.getKeyCode() == KeyEvent.VK_ENTER) { 
+      try {
+            String nome = txtDescricao.getText();
+            Funcionario obj = new Funcionario();
+            FuncionarioDAO dao = new FuncionarioDAO();
+            
+            obj = dao.consultaFuncionarioPorNome(nome);
+            if(obj.getNome()!= null){
+            txtCodFuncionario.setText(String.valueOf(obj.getId_funcionario()));
+               txtNomeFunc.setText(obj.getNome());
+   
+               
+            }else{
+            JOptionPane.showMessageDialog(null, "FUNCIONARIO NÃO ENCONTRADO");
+            
+            }
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+       
+       }    }//GEN-LAST:event_txtNomeFuncKeyPressed
+
+    private void txtDescricaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescricaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDescricaoActionPerformed
 
 
     /**
