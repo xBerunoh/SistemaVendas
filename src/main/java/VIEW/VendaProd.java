@@ -25,6 +25,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class VendaProd extends javax.swing.JFrame {
         public double PrecoUnitario;
+        public double valorTotalVenda;
+        static String valorTotalStr;
     //listando dados da tabela
     public void listar(){
     
@@ -88,6 +90,7 @@ public class VendaProd extends javax.swing.JFrame {
         double valorTot = quantia*PrecoUnitario;
         String precostr = String.valueOf(valorTot);
         txtPreco.setText(precostr);
+        
 
     }
 
@@ -615,7 +618,9 @@ public class VendaProd extends javax.swing.JFrame {
         double preco = Double.parseDouble(txtPreco.getText());
         int quantia = Integer.parseInt(txtQuantidade.getText());
         int codigo = Integer.parseInt(txtCodigoDados.getText());
-        double valorTot = quantia*preco;
+        double valorTot = quantia*PrecoUnitario;
+         String precostr = String.valueOf(valorTot);
+        valorTotalStr = precostr;
         
         Venda vendaFim = new Venda();
         vendaFim.setFk_estoque(codigo);
@@ -624,7 +629,8 @@ public class VendaProd extends javax.swing.JFrame {
         vendaFim.setValor_total(valorTot);
         VendaDAO dao = new VendaDAO();
         dao.adiciona(vendaFim);
-        JOptionPane.showMessageDialog(null, "VENDIDO");
+       vendaFeita vendido = new vendaFeita();
+       vendido.setVisible(true);
         
     }//GEN-LAST:event_btnFinalVendaActionPerformed
 
