@@ -88,6 +88,40 @@ public List<Funcionario> getLista() {
 			throw new RuntimeException(e);
 		}
 	}
+  public Funcionario consultaFuncionarioPorNome(String nome){
+        try {
+ 
+            String sql= "select * from funcionario where nome like ?";
+            PreparedStatement pst = connection.prepareStatement(sql);
+            pst.setString(1, nome);
+            ResultSet rs = pst.executeQuery();   
+            Funcionario obj = new Funcionario();
+
+             if(rs.next()){
+            
+            
+             obj.setId_funcionario(rs.getInt("id_funcionario"));
+            obj.setFuncao(rs.getString("funcao"));
+            obj.setNome(rs.getString("nome"));
+            
+            
+            
+            
+            }
+             return obj;
+        
+        
+        
+        
+        } catch (Exception e) {
+            
+            JOptionPane.showMessageDialog(null,"Erro, cliente não encontrado,"
+                    + "para mais detalhes segue o codigo detalhado: \n"+ e);
+            return null;
+            
+            
+        }
+    }
 }
 
 

@@ -163,6 +163,23 @@ public List<Estoque> getLista() {
             
         }
     }
+  public void alteraQuantidadeEstoque(Estoque estoque){
+  		String sql = "update estoque set quantidade=? where id_produto=?;";
+		try {
+			PreparedStatement stmt = connection.prepareStatement(sql);
+
+			stmt.setInt(1, estoque.getQuantidade());
+			
+			stmt.execute();
+			stmt.close();
+			JOptionPane.showMessageDialog(null, "Compra realizada com sucesso!");
+
+		} catch (Exception e) {
+                            JOptionPane.showMessageDialog(null, e);
+                }
+  
+  }
+  
     
 
 }
