@@ -18,12 +18,15 @@ public class VendaDAO {
 
 	}
 public void adiciona(Venda venda){
-		String sql = "insert into venda" + "(quantidade_item,valor_total)" + "values (?,?)";
+		String sql = "insert into venda" + "(fk_estoque, fk_funcionario,"
+                        + " quantidade_item, valor_total)" + "values (?,?,?,?)";
 		try {
                     PreparedStatement stmt = connection.prepareStatement(sql);
                         
-                        stmt.setInt(1,venda.getQuantidade_item());
-                        stmt.setDouble(2,venda.getValor_total());
+                        stmt.setInt(1,venda.getFk_estoque());
+                        stmt.setInt(2,venda.getFk_funcionario());
+                        stmt.setInt(3, venda.getQuantidade_item());
+                        stmt.setDouble(4, venda.getValor_total());
                         
                        
                      

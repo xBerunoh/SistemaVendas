@@ -7,6 +7,7 @@ package VIEW;
 
 import MODEL.Estoque;
 import DAO.EstoqueDAO;
+import MODEL.Venda;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -71,8 +72,9 @@ public class VendaProd extends javax.swing.JFrame {
         btnPesquisaNomeDadosPessoais = new javax.swing.JButton();
         txtPreco = new javax.swing.JTextField();
         txtQuantidade = new javax.swing.JTextField();
-        txtFuncionario = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
         painelConsultaClientes = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaDeProdutos = new javax.swing.JTable();
@@ -80,7 +82,7 @@ public class VendaProd extends javax.swing.JFrame {
         txtNomeConsultaCliente = new javax.swing.JTextField();
         btnPesquisaCliente = new javax.swing.JToggleButton();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        btnFinalVenda = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -151,6 +153,10 @@ public class VendaProd extends javax.swing.JFrame {
 
         jLabel5.setText("Funcionário:");
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Rogério Zika do Bagulho", "Jorginho Tiroteio", "Marcos Fura Camisa", "Teta de Moça", "Papai", "Zé Pequeno" }));
+
+        jLabel6.setText("Codigo Funcionário: ");
+
         javax.swing.GroupLayout painelDadosProdutoLayout = new javax.swing.GroupLayout(painelDadosProduto);
         painelDadosProduto.setLayout(painelDadosProdutoLayout);
         painelDadosProdutoLayout.setHorizontalGroup(
@@ -183,8 +189,11 @@ public class VendaProd extends javax.swing.JFrame {
                                         .addComponent(jLabel15)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(txtFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap(705, Short.MAX_VALUE))))
+                                    .addGroup(painelDadosProdutoLayout.createSequentialGroup()
+                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel6)))))
+                        .addContainerGap(798, Short.MAX_VALUE))))
         );
         painelDadosProdutoLayout.setVerticalGroup(
             painelDadosProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -206,9 +215,10 @@ public class VendaProd extends javax.swing.JFrame {
                     .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(painelDadosProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addContainerGap(135, Short.MAX_VALUE))
+                    .addComponent(jLabel5)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addContainerGap(133, Short.MAX_VALUE))
         );
 
         painelDaTabelaClientes.addTab("Venda", painelDadosProduto);
@@ -294,10 +304,10 @@ public class VendaProd extends javax.swing.JFrame {
 
         painelDaTabelaClientes.addTab("Consulta de Funcionarios", jPanel2);
 
-        jButton1.setText("Finalizar Venda");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnFinalVenda.setText("Finalizar Venda");
+        btnFinalVenda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnFinalVendaActionPerformed(evt);
             }
         });
 
@@ -306,10 +316,10 @@ public class VendaProd extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(painelDaTabelaClientes)
+            .addComponent(painelDaTabelaClientes, javax.swing.GroupLayout.DEFAULT_SIZE, 1390, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(218, 218, 218)
-                .addComponent(jButton1)
+                .addGap(417, 417, 417)
+                .addComponent(btnFinalVenda)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -318,9 +328,9 @@ public class VendaProd extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(82, 82, 82)
                 .addComponent(painelDaTabelaClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(21, 21, 21))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addComponent(btnFinalVenda)
+                .addGap(36, 36, 36))
         );
 
         setSize(new java.awt.Dimension(1400, 663));
@@ -470,16 +480,21 @@ public class VendaProd extends javax.swing.JFrame {
        }
     }//GEN-LAST:event_txtDescricaoKeyPressed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnFinalVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalVendaActionPerformed
         // TODO add your handling code here:
         String desc = txtDescricao.getText();
         double preco = Double.parseDouble(txtPreco.getText());
         int quantia = Integer.parseInt(txtQuantidade.getText());
         int codigo = Integer.parseInt(txtCodigoDados.getText());
+        double valorTot = quantia*preco;
+        
+        Venda vendaFim = new Venda();
+        vendaFim.setFk_estoque(codigo);
+        vendaFim.set
+        vendaFim.se
         
         
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnFinalVendaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -520,9 +535,10 @@ public class VendaProd extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnFinalVenda;
     private javax.swing.JToggleButton btnPesquisaCliente;
     private javax.swing.JButton btnPesquisaNomeDadosPessoais;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -530,6 +546,7 @@ public class VendaProd extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -539,7 +556,6 @@ public class VendaProd extends javax.swing.JFrame {
     private javax.swing.JTable tabelaDeProdutos;
     private javax.swing.JTextField txtCodigoDados;
     private javax.swing.JTextField txtDescricao;
-    private javax.swing.JTextField txtFuncionario;
     private javax.swing.JTextField txtNomeConsultaCliente;
     private javax.swing.JTextField txtPreco;
     private javax.swing.JTextField txtQuantidade;
