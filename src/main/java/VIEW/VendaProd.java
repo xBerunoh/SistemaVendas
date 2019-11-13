@@ -27,6 +27,7 @@ public class VendaProd extends javax.swing.JFrame {
         public double PrecoUnitario;
         public double valorTotalVenda;
         static String valorTotalStr;
+        public String quantidadeTotal;
     //listando dados da tabela
     public void listar(){
     
@@ -469,7 +470,7 @@ public class VendaProd extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(82, 82, 82)
                 .addComponent(painelDaTabelaClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addComponent(btnFinalVenda)
                 .addGap(36, 36, 36))
         );
@@ -510,6 +511,9 @@ public class VendaProd extends javax.swing.JFrame {
        txtQuantidade.setText("1");
        String precoUnidade = (tabelaDeProdutos.getValueAt(tabelaDeProdutos.getSelectedRow(), 2).toString());
        PrecoUnitario = Double.parseDouble(precoUnidade);
+       quantidadeTotal = (tabelaDeProdutos.getValueAt(tabelaDeProdutos.getSelectedRow(), 3).toString());
+    
+       
        
         
         
@@ -630,17 +634,27 @@ public class VendaProd extends javax.swing.JFrame {
         double preco = Double.parseDouble(txtPreco.getText());
         int quantia = Integer.parseInt(txtQuantidade.getText());
         int codigo = Integer.parseInt(txtCodigoDados.getText());
+        int codigoFuncionario = Integer.parseInt(txtCodFuncionario.getText());
         double valorTot = quantia*PrecoUnitario;
+        int quantiaAtualizada = (Integer.parseInt(quantidadeTotal))-quantia;
          String precostr = String.valueOf(valorTot);
         valorTotalStr = precostr;
         
         Venda vendaFim = new Venda();
         vendaFim.setFk_estoque(codigo);
-        vendaFim.setFk_funcionario(codigo);
+        vendaFim.setFk_funcionario(codigoFuncionario);
         vendaFim.setQuantidade_item(quantia);
         vendaFim.setValor_total(valorTot);
         VendaDAO dao = new VendaDAO();
         dao.adiciona(vendaFim);
+        
+      Estoque estoque = new Estoque();
+        estoque.setQuantidade(quantiaAtualizada);
+        estoque.setId_produto(codigo);
+        EstoqueDAO estDao = new EstoqueDAO();
+        estDao.alteraQuantidade(estoque);
+                
+        
        vendaFeita vendido = new vendaFeita();
        vendido.setVisible(true);
         
