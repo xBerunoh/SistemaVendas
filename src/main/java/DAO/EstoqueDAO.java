@@ -47,7 +47,7 @@ public void altera(Estoque estoque) {
 
 			stmt.execute();
 			stmt.close();
-			JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
+			
 
 		} catch (Exception e) {
                             JOptionPane.showMessageDialog(null, e);

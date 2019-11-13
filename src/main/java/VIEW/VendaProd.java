@@ -652,7 +652,8 @@ public class VendaProd extends javax.swing.JFrame {
         estoque.setQuantidade(quantiaAtualizada);
         estoque.setId_produto(codigo);
         EstoqueDAO estDao = new EstoqueDAO();
-        estDao.alteraQuantidade(estoque);
+        estDao.alteraQuantidade
+        (estoque);
                 
         
        vendaFeita vendido = new vendaFeita();

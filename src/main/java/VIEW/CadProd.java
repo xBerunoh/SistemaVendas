@@ -80,7 +80,6 @@ public class CadProd extends javax.swing.JFrame {
         btnSalvarCadCli = new javax.swing.JButton();
         btnNovoCadCli = new javax.swing.JButton();
         btnExcluirCadCli = new javax.swing.JButton();
-        btnEditarCadCli = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -289,29 +288,20 @@ public class CadProd extends javax.swing.JFrame {
             }
         });
 
-        btnEditarCadCli.setText("EDITAR");
-        btnEditarCadCli.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarCadCliActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(painelDaTabelaClientes)
+            .addComponent(painelDaTabelaClientes, javax.swing.GroupLayout.DEFAULT_SIZE, 1390, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(517, 517, 517)
                 .addComponent(btnNovoCadCli)
                 .addGap(18, 18, 18)
                 .addComponent(btnSalvarCadCli)
                 .addGap(18, 18, 18)
-                .addComponent(btnEditarCadCli)
-                .addGap(18, 18, 18)
                 .addComponent(btnExcluirCadCli)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -319,9 +309,8 @@ public class CadProd extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(82, 82, 82)
                 .addComponent(painelDaTabelaClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEditarCadCli)
                     .addComponent(btnExcluirCadCli)
                     .addComponent(btnSalvarCadCli)
                     .addComponent(btnNovoCadCli))
@@ -382,24 +371,6 @@ public class CadProd extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnExcluirCadCliActionPerformed
-
-    private void btnEditarCadCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarCadCliActionPerformed
-        // TODO add your handling code here:
-                    Estoque estoque = new Estoque();
-
-        try {
-            estoque.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
-            estoque.setDescricao(txtDescricao.getText());
-            estoque.setPreco(Double.parseDouble(txtPreco.getText()));
-            EstoqueDAO dao = new EstoqueDAO();
-            dao.altera(estoque);
-            new utilitarios().LimpaTela(painelDadosProduto);
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, e);
-
-        }
-    }//GEN-LAST:event_btnEditarCadCliActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
        ///caregar a lista
@@ -573,7 +544,6 @@ public class CadProd extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEditarCadCli;
     private javax.swing.JButton btnExcluirCadCli;
     private javax.swing.JButton btnNovoCadCli;
     private javax.swing.JToggleButton btnPesquisaCliente;
